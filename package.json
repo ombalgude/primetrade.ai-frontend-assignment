@@ -1,0 +1,20 @@
+{
+  "name": "primetrade-assignment",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@8.10.5",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "format": "prettier \"**/*.{ts,tsx,js,jsx,json,md}\" --write"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "prettier": "^3.2.5",
+    "turbo": "^1.12.5",
+    "typescript": "^5.3.3"
+  }
+}
+
+

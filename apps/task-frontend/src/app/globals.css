@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Modern Paper Workspace Theme */
+  color-scheme: light;
+
+  /* Paper base colors */
+  --paper: 250 247 242; /* #FAF7F2 */
+  --ink: 27 27 27; /* #1B1B1B */
+  --soft-gray: 122 122 122; /* #7A7A7A */
+  --accent-blue: 86 115 255; /* #5673FF */
+  --accent-green: 46 196 182; /* #2EC4B6 */
+  --kraft-brown: 199 165 128; /* #C7A580 */
+
+  /* Status colors */
+  --success: 46 196 182; /* #2EC4B6 */
+  --warning: 255 171 0; /* #ffab00 */
+  --danger: 239 68 68; /* #ef4444 */
+
+  /* Spacing and radius */
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* Font families */
+  --font-hand: 'Patrick Hand', cursive;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: rgb(var(--paper));
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" /></filter><rect width="100" height="100" fill="%23FAF7F2" /><rect width="100" height="100" fill="%23000000" opacity="0.01" filter="url(%23noise)" /></svg>');
+    color: rgb(var(--ink));
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  * {
+    @apply border-gray-300;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  ::selection {
+    background-color: rgba(var(--accent-blue), 0.2);
+    color: rgb(var(--ink));
+  }
+
+  /* Accessibility: respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus-visible for keyboard users */
+  :focus-visible {
+    outline: 3px solid rgba(var(--accent-blue), 0.18);
+    outline-offset: 3px;
+  }
+
+  /* Handwriting font for headers */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-hand);
+  }
+}
+
+@layer components {
+  /* Paper Card Style */
+  .paper-card {
+    @apply rounded-2xl bg-white border border-gray-200 shadow-card;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" /></filter><rect width="100" height="100" fill="%23ffffff" /><rect width="100" height="100" fill="%23000000" opacity="0.01" filter="url(%23noise)" /></svg>');
+    @apply transition-all duration-120 ease-soft;
+  }
+
+  .paper-card:hover {
+    @apply shadow-card-hover;
+    transform: translateY(-2px);
+  }
+
+  /* Sticky note style */
+  .sticky-note {
+    @apply rounded-lg bg-yellow-50 border border-yellow-200 shadow-ink-light;
+    background-color: rgba(254, 252, 191, 0.4);
+    transform: rotate(-1deg);
+  }
+
+  /* Handwritten title */
+  .handwritten-title {
+    font-family: var(--font-hand);
+    @apply text-ink font-bold tracking-wide;
+  }
+
+  /* Button styles */
+  .btn {
+    @apply inline-flex items-center justify-center font-semibold cursor-pointer transition-all duration-120 ease-soft;
+  }
+
+  .btn-primary {
+    @apply bg-accent-blue text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition-all duration-120 ease-soft;
+    box-shadow: 0 2px 8px rgba(var(--accent-blue), 0.3);
+  }
+
+  .btn-primary:hover {
+    @apply shadow-card;
+  }
+
+  .btn-primary:active {
+    transform: scale(0.95);
+  }
+
+  .btn-secondary {
+    @apply bg-accent-green text-white rounded-lg px-4 py-2 hover:bg-teal-700 transition-all duration-120 ease-soft;
+    box-shadow: 0 2px 8px rgba(var(--accent-green), 0.3);
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.95);
+  }
+
+  .btn-outline {
+    @apply border-2 border-accent-blue text-accent-blue bg-transparent rounded-lg px-4 py-2 hover:bg-blue-50 transition-all duration-120 ease-soft;
+  }
+
+  .btn-outline:active {
+    transform: scale(0.95);
+  }
+
+  .btn-ghost {
+    @apply text-soft-gray hover:bg-gray-100 rounded-lg px-4 py-2 transition-all duration-120 ease-soft;
+  }
+
+  .btn-ghost:active {
+    transform: scale(0.95);
+  }
+
+  /* Input with ink underline */
+  .ink-input {
+    @apply w-full bg-transparent border-b-2 border-ink px-2 py-1 text-ink placeholder-soft-gray focus:outline-none;
+    transition: border-color 120ms ease-out, transform 120ms ease-out;
+  }
+
+  .ink-input:focus {
+    @apply border-accent-blue;
+  }
+
+  .ink-input::placeholder {
+    transform: translateY(4px);
+    opacity: 0.5;
+  }
+
+  .ink-input:focus::placeholder {
+    transform: translateY(0);
+  }
+
+  /* Ruled paper background */
+  .ruled-paper {
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 28px,
+      rgba(var(--accent-blue), 0.03) 28px,
+      rgba(var(--accent-blue), 0.03) 29px
+    );
+  }
+
+  /* Form error stamp style */
+  .error-stamp {
+    @apply text-xs text-red-600 inline-block rounded-full px-2 py-1;
+    background-color: rgba(239, 68, 68, 0.1);
+    font-weight: 600;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+}
